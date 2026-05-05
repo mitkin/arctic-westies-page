@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arctic Westies — West Coast Swing in Tromsø</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Tokens ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #080d1a;
+      --navy-mid:  #0e1629;
+      --teal:      #00c8d7;
+      --teal-dim:  #00909c;
+      --aurora:    #57e5a0;
+      --ice:       #dff2f6;
+      --white:     #ffffff;
+      --muted:     #8fa8b8;
+      --card-bg:   #111c2e;
+      --radius:    14px;
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--ice);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(8, 13, 26, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 200, 215, 0.12);
+      transition: background var(--transition);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--aurora) !important; transform: translateY(-1px); }
+
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    /* Slideshow */
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.35) saturate(1.2);
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 1.5s ease-in-out;
+    }
+    .hero-slide.active {
+      opacity: 1;
+      animation: slowZoom 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.12); }
+    }
+
+    /* aurora shimmer overlay */
+    .hero-slides::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(0,200,215,0.18) 0%,
+        rgba(87,229,160,0.08) 40%,
+        rgba(8,13,26,0.6) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 200, 215, 0.15);
+      border: 1px solid rgba(0, 200, 215, 0.4);
+      color: var(--teal);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--aurora);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.5); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin: 1.2rem 0 2.5rem;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 0 28px rgba(0, 200, 215, 0.35);
+    }
+    .btn-primary:hover {
+      background: var(--aurora);
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(87, 229, 160, 0.4);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      border: 1.5px solid rgba(0, 200, 215, 0.45);
+      color: var(--ice);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: border-color var(--transition), color var(--transition), background var(--transition);
+    }
+    .btn-ghost:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: rgba(0, 200, 215, 0.06);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      40%  { transform: scaleY(1); opacity: 1; }
+      100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ── Section Shared ─────────────────────────────── */
+    section { padding: 7rem 2rem; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-body {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      line-height: 1.75;
+    }
+
+    .container { max-width: 1160px; margin-inline: auto; }
+
+    /* ── About ──────────────────────────────────────── */
+    #about {
+      background: var(--navy-mid);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    /* About carousel */
+    .about-image-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .about-carousel {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+    }
+    .about-carousel img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9) saturate(1.1);
+      pointer-events: none;
+      user-select: none;
+    }
+    .about-image-accent {
+      position: absolute;
+      inset: -16px;
+      border-radius: calc(var(--radius) + 8px);
+      border: 1.5px solid rgba(0, 200, 215, 0.25);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .about-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(8,13,26,0.55);
+      border: 1px solid rgba(0,200,215,0.3);
+      color: var(--teal);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background var(--transition), border-color var(--transition);
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .about-carousel-btn:hover {
+      background: rgba(0,200,215,0.2);
+      border-color: var(--teal);
+    }
+    .about-carousel-btn.prev { left: 10px; }
+    .about-carousel-btn.next { right: 10px; }
+    .about-carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .about-carousel-dots span {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      transition: background var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    .about-carousel-dots span.active {
+      background: var(--teal);
+      transform: scale(1.3);
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 200, 215, 0.12);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+    .stat-card .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .stat-card .label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── What is WCS ────────────────────────────────── */
+    #wcs {
+      background: var(--navy);
+      text-align: center;
+    }
+    .wcs-intro {
+      max-width: 680px;
+      margin-inline: auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 200, 215, 0.1);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: left;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover {
+      border-color: rgba(0, 200, 215, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0, 200, 215, 0.1);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .feature-card h3 {
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ── Gallery ────────────────────────────────────── */
+    #gallery {
+      background: var(--navy-mid);
+    }
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius);
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 1;
+      transition: transform 0.6s cubic-bezier(.4,0,.2,1), filter 0.6s ease;
+      filter: brightness(0.85) saturate(1.1);
+    }
+    .gallery-item:nth-child(1) img { aspect-ratio: auto; }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1) saturate(1.3);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(8,13,26,0.5));
+      pointer-events: none;
+    }
+
+    /* ── Schedule / Join ────────────────────────────── */
+    #join {
+      background: var(--navy);
+    }
+    .join-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .schedule-list {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 200, 215, 0.1);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      transition: border-color var(--transition);
+    }
+    .schedule-item:hover { border-color: rgba(0, 200, 215, 0.35); }
+    .schedule-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+    .schedule-dot.aurora { background: var(--aurora); }
+    .schedule-item-text .day {
+      font-weight: 600;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+    .schedule-item-text .desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .join-form-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 200, 215, 0.15);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+    .join-form-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .join-form-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0, 200, 215, 0.18);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.1rem;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-group input::placeholder { color: var(--muted); }
+    .form-group input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0, 200, 215, 0.1);
+    }
+    .form-submit {
+      width: 100%;
+      background: var(--teal);
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      padding: 0.9rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .form-submit:hover {
+      background: var(--aurora);
+      transform: translateY(-1px);
+    }
+
+    /* ── Social Links ───────────────────────────────── */
+    #social {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 200, 215, 0.15);
+      color: var(--ice);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      transition: border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+    .social-link svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+    .social-link:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(0, 200, 215, 0.1);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--teal); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Scroll-reveal ──────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .about-grid,
+      .join-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .features-grid { grid-template-columns: 1fr 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 5rem 1.25rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────── -->
+  <nav>
+    <a href="#" class="nav-logo">Arctic <span>Westies</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#wcs">WCS</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#join" class="nav-cta">Join Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('res/669555722_122290406372065096_7731487247216348692_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/671834419_122290404608065096_618133652669736184_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/669970367_122290406996065096_5418430406136648073_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/670624724_122290405556065096_8692727728279044291_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/670909158_122290405946065096_632603687669706200_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/670921360_122290405538065096_1580877307536704262_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/670985426_122290407302065096_5317517016173339021_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/671493852_122290406324065096_4670091031132647930_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/671787609_122290405724065096_8483701940552019245_n.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('res/673459684_122290405802065096_8936611366694424307_n.jpg')"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Tromsø · Norway · 69°N</div>
+      <h1>Dance Under<br /><em>Arctic Skies</em></h1>
+      <p class="hero-sub">
+        West Coast Swing dancing in the world's northernmost city.
+        Beginners welcome — just show up and feel the groove.
+      </p>
+      <div class="hero-actions">
+        <a href="#join" class="btn-primary">Join a Class</a>
+        <a href="#wcs" class="btn-ghost">What is WCS?</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ── About ───────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap reveal" id="aboutCarouselWrap">
+          <div class="about-carousel" id="aboutCarousel">
+            <img src="res/669555722_122290406372065096_7731487247216348692_n.jpg" alt="Arctic Westies dancers" />
+            <img src="res/671834419_122290404608065096_618133652669736184_n.jpg" alt="Arctic Westies social" />
+            <img src="res/669970367_122290406996065096_5418430406136648073_n.jpg" alt="WCS class Tromsø" />
+            <img src="res/670624724_122290405556065096_8692727728279044291_n.jpg" alt="Arctic Westies event" />
+            <img src="res/670909158_122290405946065096_632603687669706200_n.jpg" alt="WCS social dance" />
+            <img src="res/670921360_122290405538065096_1580877307536704262_n.jpg" alt="Dance class" />
+            <img src="res/671493852_122290406324065096_4670091031132647930_n.jpg" alt="Arctic Westies dancers" />
+            <img src="res/671787609_122290405724065096_8483701940552019245_n.jpg" alt="WCS in Tromsø" />
+            <img src="res/673459684_122290405802065096_8936611366694424307_n.jpg" alt="Arctic Westies" />
+          </div>
+          <button class="about-carousel-btn prev" aria-label="Previous">&#8249;</button>
+          <button class="about-carousel-btn next" aria-label="Next">&#8250;</button>
+          <div class="about-carousel-dots" id="aboutDots"></div>
+          <div class="about-image-accent"></div>
+        </div>
+        <div>
+          <span class="section-label reveal">Who we are</span>
+          <h2 class="section-title reveal reveal-delay-1">A Community<br />Built on Joy</h2>
+          <p class="section-body reveal reveal-delay-2">
+            Arctic Westies is Tromsø's dedicated West Coast Swing club.
+            We bring together dancers of all levels — complete beginners to
+            seasoned pros — in a welcoming, inclusive environment where the
+            only requirement is enthusiasm.
+          </p>
+          <p class="section-body reveal reveal-delay-2" style="margin-top:1rem;">
+            We run regular weekly classes, social dances, and participate
+            in national and international WCS events. Whether you want to
+            learn, improve, or just dance for fun, you're in the right place.
+          </p>
+          <div class="about-stats">
+            <div class="stat-card reveal reveal-delay-3">
+              <div class="num">2+</div>
+              <div class="label">Years dancing in Tromsø</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-3">
+              <div class="num">All</div>
+              <div class="label">Levels welcome</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-4">
+              <div class="num">Weekly</div>
+              <div class="label">Classes & socials</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-4">
+              <div class="num">Open</div>
+              <div class="label">Role &amp; partner policy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What is WCS ──────────────────────────── -->
+  <section id="wcs">
+    <div class="container">
+      <div class="wcs-intro">
+        <span class="section-label reveal">The dance</span>
+        <h2 class="section-title reveal reveal-delay-1">What is West Coast Swing?</h2>
+        <p class="section-body reveal reveal-delay-2" style="margin-inline:auto;">
+          West Coast Swing is a partner dance rooted in American swing tradition.
+          It's improvisational, musical, and endlessly adaptable — danced to
+          everything from blues and pop to hip-hop and country. No two dances are
+          ever the same.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <span class="feature-icon">🎵</span>
+          <h3>Music Freedom</h3>
+          <p>WCS works with almost any contemporary music — from slow blues to uptempo pop. The dance follows the song, not the other way around.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <span class="feature-icon">🤝</span>
+          <h3>Partner Connection</h3>
+          <p>Built on lead-follow communication, WCS teaches you to listen, respond, and create a conversation through movement.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <span class="feature-icon">🌱</span>
+          <h3>Beginner Friendly</h3>
+          <p>You don't need a partner or prior experience. Our beginner series takes you from zero to the social floor in just a few sessions.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <span class="feature-icon">✨</span>
+          <h3>Improvisation</h3>
+          <p>Once you know the basics, WCS becomes a creative conversation — every dance a unique, in-the-moment expression.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <span class="feature-icon">🌍</span>
+          <h3>Global Community</h3>
+          <p>WCS is danced worldwide. Your skills travel with you — events, workshops, and socials happen on every continent.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <span class="feature-icon">❄️</span>
+          <h3>Arctic Edition</h3>
+          <p>We dance under the northern lights, the midnight sun, and everything in between. Tromsø adds its own magic to every social.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Gallery ──────────────────────────────── -->
+  <section id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label reveal">Moments</span>
+          <h2 class="section-title reveal reveal-delay-1">From Our Dances</h2>
+        </div>
+        <a href="#social" class="btn-ghost reveal">Follow us for more →</a>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="res/669555722_122290406372065096_7731487247216348692_n.jpg" alt="WCS class in Tromsø" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal reveal-delay-1">
+          <img src="res/671834419_122290404608065096_618133652669736184_n.jpg" alt="Arctic Westies social dance" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal reveal-delay-2">
+          <img src="res/669970367_122290406996065096_5418430406136648073_n.jpg" alt="WCS dancers at event" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal reveal-delay-1">
+          <img src="res/670624724_122290405556065096_8692727728279044291_n.jpg" alt="Arctic Westies dancers" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal reveal-delay-2">
+          <img src="res/670909158_122290405946065096_632603687669706200_n.jpg" alt="WCS social in Tromsø" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal reveal-delay-3">
+          <img src="res/670921360_122290405538065096_1580877307536704262_n.jpg" alt="Dance class" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal reveal-delay-3">
+          <img src="res/671493852_122290406324065096_4670091031132647930_n.jpg" alt="Arctic Westies event" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Join / Schedule ──────────────────────── -->
+  <section id="join">
+    <div class="container">
+      <div class="join-grid">
+        <div>
+          <span class="section-label reveal">Get involved</span>
+          <h2 class="section-title reveal reveal-delay-1">When We Dance</h2>
+          <p class="section-body reveal reveal-delay-2">
+            We meet regularly for classes and social dances.
+            Check our Facebook page for the most up-to-date schedule and
+            any special events or workshops.
+          </p>
+          <div class="schedule-list">
+            <div class="schedule-item reveal reveal-delay-1">
+              <div class="schedule-dot"></div>
+              <div class="schedule-item-text">
+                <div class="day">Weekly Classes</div>
+                <div class="desc">Beginner &amp; improver lessons — check Facebook for current day &amp; time</div>
+              </div>
+            </div>
+            <div class="schedule-item reveal reveal-delay-2">
+              <div class="schedule-dot aurora"></div>
+              <div class="schedule-item-text">
+                <div class="day">Monthly Social</div>
+                <div class="desc">Open social dance — all levels, all are welcome</div>
+              </div>
+            </div>
+            <div class="schedule-item reveal reveal-delay-3">
+              <div class="schedule-dot"></div>
+              <div class="schedule-item-text">
+                <div class="day">Special Workshops</div>
+                <div class="desc">Guest instructors and themed events throughout the year</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="join-form-card reveal reveal-delay-2">
+          <h3>Stay in the Loop</h3>
+          <p>Drop your email and we'll notify you about upcoming classes, socials, and events.</p>
+          <form onsubmit="handleSignup(event)">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Your email" required autocomplete="email" />
+            </div>
+            <button type="submit" class="form-submit">Sign Me Up ✦</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Social ───────────────────────────────── -->
+  <section id="social">
+    <div class="container">
+      <span class="section-label reveal">Find us</span>
+      <h2 class="section-title reveal reveal-delay-1">Follow the Journey</h2>
+      <p class="section-body reveal reveal-delay-2" style="margin-inline:auto; text-align:center;">
+        Stay connected for class updates, event announcements, and a steady
+        stream of dance videos from the top of the world.
+      </p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/groups/arcticwesties" target="_blank" rel="noopener noreferrer" class="social-link reveal reveal-delay-1">
+          <!-- Facebook icon -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.instagram.com/arcticwesties" target="_blank" rel="noopener noreferrer" class="social-link reveal reveal-delay-2">
+          <!-- Instagram icon -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────── -->
+  <footer>
+    <p>
+      © 2026 Arctic Westies Tromsø ·
+      West Coast Swing at 69°N ·
+      <a href="mailto:hello@arcticwesties.no">hello@arcticwesties.no</a>
+    </p>
+  </footer>
+
+  <!-- ── Scripts ──────────────────────────────── -->
+  <script>
+    // Hero slideshow
+    (function () {
+      const slides = document.querySelectorAll('.hero-slide');
+      let current = 0;
+      setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+      }, 5000);
+    })();
+
+    // About carousel
+    (function () {
+      const wrap = document.getElementById('aboutCarouselWrap');
+      const track = document.getElementById('aboutCarousel');
+      const dotsContainer = document.getElementById('aboutDots');
+      const total = track.children.length;
+      let current = 0;
+      let autoTimer;
+      let startX = 0;
+
+      // Build dots
+      for (let i = 0; i < total; i++) {
+        const d = document.createElement('span');
+        if (i === 0) d.classList.add('active');
+        d.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(d);
+      }
+
+      function goTo(idx) {
+        current = (idx + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsContainer.querySelectorAll('span').forEach((d, i) =>
+          d.classList.toggle('active', i === current)
+        );
+      }
+
+      function startAuto() {
+        autoTimer = setInterval(() => goTo(current + 1), 4000);
+      }
+      function stopAuto() { clearInterval(autoTimer); }
+
+      wrap.querySelector('.prev').addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+      wrap.querySelector('.next').addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+
+      // Touch / drag swipe
+      track.addEventListener('pointerdown', e => { startX = e.clientX; track.setPointerCapture(e.pointerId); });
+      track.addEventListener('pointerup', e => {
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 40) { stopAuto(); goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
+      });
+
+      startAuto();
+    })();
+
+    // Scroll-reveal
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Fake form handler (placeholder)
+    function handleSignup(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = '✓ You\'re on the list!';
+      btn.style.background = 'var(--aurora)';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
