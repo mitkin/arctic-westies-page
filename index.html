@@ -14,10 +14,12 @@
     :root {
       --navy:      #080d1a;
       --navy-mid:  #0e1629;
-      --teal:      #00c8d7;
-      --teal-dim:  #00909c;
-      --aurora:    #57e5a0;
-      --ice:       #dff2f6;
+        --teal:      #62e2e7;
+        --teal-rgb:  98, 226, 231;
+        --teal-dim:  #2faeb5;
+        --aurora:    #a7f4f7;
+        --aurora-rgb: 167, 244, 247;
+        --ice:       #e4fbfc;
       --white:     #ffffff;
       --muted:     #8fa8b8;
       --card-bg:   #111c2e;
@@ -47,17 +49,26 @@
       background: rgba(8, 13, 26, 0.7);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(0, 200, 215, 0.12);
+      border-bottom: 1px solid rgba(var(--teal-rgb), 0.12);
       transition: background var(--transition);
     }
 
     .nav-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
       font-family: 'Playfair Display', serif;
       font-size: 1.35rem;
       color: var(--white);
       text-decoration: none;
       letter-spacing: 0.02em;
     }
+      .nav-logo-mark {
+        width: 2.1rem;
+        height: 2.1rem;
+        flex-shrink: 0;
+        display: block;
+      }
     .nav-logo span { color: var(--teal); }
 
     .nav-links {
@@ -132,8 +143,8 @@
       inset: 0;
       background: linear-gradient(
         160deg,
-        rgba(0,200,215,0.18) 0%,
-        rgba(87,229,160,0.08) 40%,
+        rgba(var(--teal-rgb), 0.18) 0%,
+        rgba(var(--aurora-rgb), 0.08) 40%,
         rgba(8,13,26,0.6) 100%
       );
       pointer-events: none;
@@ -149,8 +160,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(0, 200, 215, 0.15);
-      border: 1px solid rgba(0, 200, 215, 0.4);
+      background: rgba(var(--teal-rgb), 0.15);
+      border: 1px solid rgba(var(--teal-rgb), 0.4);
       color: var(--teal);
       font-size: 0.78rem;
       font-weight: 600;
@@ -210,17 +221,17 @@
       text-decoration: none;
       letter-spacing: 0.02em;
       transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 0 28px rgba(0, 200, 215, 0.35);
+      box-shadow: 0 0 28px rgba(var(--teal-rgb), 0.35);
     }
     .btn-primary:hover {
       background: var(--aurora);
       transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(87, 229, 160, 0.4);
+      box-shadow: 0 0 40px rgba(var(--aurora-rgb), 0.4);
     }
 
     .btn-ghost {
       display: inline-block;
-      border: 1.5px solid rgba(0, 200, 215, 0.45);
+      border: 1.5px solid rgba(var(--teal-rgb), 0.45);
       color: var(--ice);
       font-weight: 500;
       font-size: 0.95rem;
@@ -232,7 +243,7 @@
     .btn-ghost:hover {
       border-color: var(--teal);
       color: var(--teal);
-      background: rgba(0, 200, 215, 0.06);
+      background: rgba(var(--teal-rgb), 0.06);
     }
 
     .hero-scroll {
@@ -330,7 +341,7 @@
       position: absolute;
       inset: -16px;
       border-radius: calc(var(--radius) + 8px);
-      border: 1.5px solid rgba(0, 200, 215, 0.25);
+      border: 1.5px solid rgba(var(--teal-rgb), 0.25);
       pointer-events: none;
       z-index: -1;
     }
@@ -339,7 +350,7 @@
       top: 50%;
       transform: translateY(-50%);
       background: rgba(8,13,26,0.55);
-      border: 1px solid rgba(0,200,215,0.3);
+      border: 1px solid rgba(var(--teal-rgb), 0.3);
       color: var(--teal);
       width: 36px; height: 36px;
       border-radius: 50%;
@@ -353,7 +364,7 @@
       line-height: 1;
     }
     .about-carousel-btn:hover {
-      background: rgba(0,200,215,0.2);
+      background: rgba(var(--teal-rgb), 0.2);
       border-color: var(--teal);
     }
     .about-carousel-btn.prev { left: 10px; }
@@ -386,7 +397,7 @@
     }
     .stat-card {
       background: var(--card-bg);
-      border: 1px solid rgba(0, 200, 215, 0.12);
+      border: 1px solid rgba(var(--teal-rgb), 0.12);
       border-radius: var(--radius);
       padding: 1.4rem;
     }
@@ -419,16 +430,16 @@
     }
     .feature-card {
       background: var(--card-bg);
-      border: 1px solid rgba(0, 200, 215, 0.1);
+      border: 1px solid rgba(var(--teal-rgb), 0.1);
       border-radius: var(--radius);
       padding: 2rem 1.5rem;
       text-align: left;
       transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
     }
     .feature-card:hover {
-      border-color: rgba(0, 200, 215, 0.4);
+      border-color: rgba(var(--teal-rgb), 0.4);
       transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(0, 200, 215, 0.1);
+      box-shadow: 0 12px 36px rgba(var(--teal-rgb), 0.1);
     }
     .feature-icon {
       font-size: 2rem;
@@ -518,12 +529,12 @@
       align-items: center;
       gap: 1.2rem;
       background: var(--card-bg);
-      border: 1px solid rgba(0, 200, 215, 0.1);
+      border: 1px solid rgba(var(--teal-rgb), 0.1);
       border-radius: var(--radius);
       padding: 1.2rem 1.5rem;
       transition: border-color var(--transition);
     }
-    .schedule-item:hover { border-color: rgba(0, 200, 215, 0.35); }
+    .schedule-item:hover { border-color: rgba(var(--teal-rgb), 0.35); }
     .schedule-dot {
       width: 10px; height: 10px;
       border-radius: 50%;
@@ -544,7 +555,7 @@
 
     .join-form-card {
       background: var(--card-bg);
-      border: 1px solid rgba(0, 200, 215, 0.15);
+      border: 1px solid rgba(var(--teal-rgb), 0.15);
       border-radius: var(--radius);
       padding: 2.5rem;
     }
@@ -563,7 +574,7 @@
     .form-group input {
       width: 100%;
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(0, 200, 215, 0.18);
+      border: 1px solid rgba(var(--teal-rgb), 0.18);
       border-radius: 10px;
       color: var(--white);
       font-family: inherit;
@@ -575,7 +586,7 @@
     .form-group input::placeholder { color: var(--muted); }
     .form-group input:focus {
       border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(0, 200, 215, 0.1);
+      box-shadow: 0 0 0 3px rgba(var(--teal-rgb), 0.1);
     }
     .form-submit {
       width: 100%;
@@ -614,7 +625,7 @@
       align-items: center;
       gap: 0.6rem;
       background: var(--card-bg);
-      border: 1px solid rgba(0, 200, 215, 0.15);
+      border: 1px solid rgba(var(--teal-rgb), 0.15);
       color: var(--ice);
       text-decoration: none;
       font-size: 0.9rem;
@@ -633,7 +644,7 @@
     /* ── Footer ─────────────────────────────────────── */
     footer {
       background: var(--navy-mid);
-      border-top: 1px solid rgba(0, 200, 215, 0.1);
+      border-top: 1px solid rgba(var(--teal-rgb), 0.1);
       padding: 2rem;
       text-align: center;
       color: var(--muted);
@@ -688,7 +699,10 @@
 
   <!-- ── Navigation ──────────────────────────── -->
   <nav>
-    <a href="#" class="nav-logo">Arctic <span>Westies</span></a>
+    <a href="#" class="nav-logo">
+      <img src="res/aw-simple.svg" alt="Arctic Westies logo" class="nav-logo-mark" />
+      Arctic <span>Westies</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#wcs">WCS</a></li>
