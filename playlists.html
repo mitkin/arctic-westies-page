@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playlists — Arctic Westies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Tokens ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #080d1a;
+      --navy-mid:  #0e1629;
+      --teal:      #62e2e7;
+      --teal-rgb:  98, 226, 231;
+      --teal-dim:  #2faeb5;
+      --aurora:    #a7f4f7;
+      --aurora-rgb: 167, 244, 247;
+      --ice:       #e4fbfc;
+      --white:     #ffffff;
+      --muted:     #8fa8b8;
+      --card-bg:   #111c2e;
+      --radius:    14px;
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--navy);
+      color: var(--ice);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(8, 13, 26, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(var(--teal-rgb), 0.12);
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo-mark {
+      width: 2.1rem;
+      height: 2.1rem;
+      flex-shrink: 0;
+      display: block;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+
+    .nav-cta {
+      background: var(--teal);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--aurora) !important; transform: translateY(-1px); }
+
+    /* ── Page content ───────────────────────────────── */
+    .page-wrap {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding: 9rem 2rem 7rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .page-title em { font-style: italic; color: var(--teal); }
+
+    .page-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── Playlist grid ──────────────────────────────── */
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .playlist-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(var(--teal-rgb), 0.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .playlist-card:hover {
+      border-color: rgba(var(--teal-rgb), 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(var(--teal-rgb), 0.1);
+    }
+
+    .playlist-card iframe {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    .playlist-card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+    }
+    .playlist-card-body h3 {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .playlist-card-body p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(var(--teal-rgb), 0.1);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--teal); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 8rem 1.25rem 5rem; }
+      .playlists-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="res/aw-simple-white.svg" alt="Arctic Westies logo" class="nav-logo-mark" />
+      Arctic <span>Westies</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#wcs">WCS</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="playlists.html" class="active">Playlists</a></li>
+      <li><a href="index.html#join" class="nav-cta">Join Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Content ─────────────────────────────── -->
+  <div class="page-wrap">
+    <span class="section-label reveal">Music</span>
+    <h1 class="page-title reveal reveal-delay-1">Our <em>Playlists</em></h1>
+    <p class="page-intro reveal reveal-delay-2">
+      West Coast Swing lives and breathes through music. Here are the playlists
+      we love to dance to — from late-night blues to upbeat contemporary pop.
+    </p>
+
+    <div class="playlists-grid">
+
+      <div class="playlist-card reveal reveal-delay-1">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/1I6LQ02YNyH9MfysB2vxvR"
+          height="380"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="Arctic Westies playlist"
+        ></iframe>
+        <div class="playlist-card-body">
+          <h3>Westie Bomb</h3>
+          <p>A varying selection of tracks from a recent WCS social in Tromsø — exactly what we danced to.</p>
+        </div>
+      </div>
+
+      <div class="playlist-card reveal reveal-delay-2">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/6yUVrortJBAvNRFwE5GmbM"
+          height="380"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="Arctic Westies playlist 2"
+        ></iframe>
+        <div class="playlist-card-body">
+          <h3>JR's Selection</h3>
+          <p>A playlist from JR, one of our local Arctic Westies DJs — his pick of tracks for the floor.</p>
+        </div>
+      </div>
+
+      <div class="playlist-card reveal reveal-delay-1">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/2z10uWHX3h8ZXnhLGERfNZ"
+          height="380"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="Arctic Westies playlist 3"
+        ></iframe>
+        <div class="playlist-card-body">
+          <h3>Top WCS DJ Picks</h3>
+          <p>A top selection curated by professional West Coast Swing DJs from around the world.</p>
+        </div>
+      </div>
+
+      <div class="playlist-card reveal reveal-delay-2">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/0SNGYB6QQaUuqm2X9Loda2"
+          height="380"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="Arctic Westies playlist 4"
+        ></iframe>
+        <div class="playlist-card-body">
+          <h3>Victoria's Selection</h3>
+          <p>Handpicked by Victoria, one of our local Arctic Westies DJs — her favourite tracks to dance to.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Footer ───────────────────────────────── -->
+  <footer>
+    <p>
+      © 2026 Arctic Westies Tromsø ·
+      West Coast Swing at 69°N ·
+      <a href="mailto:hello@arcticwesties.no">hello@arcticwesties.no</a>
+    </p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
