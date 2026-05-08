@@ -258,6 +258,19 @@
       font-weight: 700;
     }
     .nav-mobile-menu .nav-cta:hover { background: var(--aurora) !important; }
+    .nav-mobile-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .nav-mobile-close:hover { color: var(--teal); }
 
     /* ── Responsive ─────────────────────────────────── */
     @media (max-width: 900px) {
@@ -293,6 +306,7 @@
 
   <!-- ── Mobile menu ─────────────────────────── -->
   <div class="nav-mobile-menu" id="navMobileMenu">
+    <button class="nav-mobile-close" id="navMobileClose" aria-label="Close menu">&times;</button>
     <a href="index.html#about">About</a>
     <a href="index.html#wcs">WCS</a>
     <a href="index.html#gallery">Gallery</a>
@@ -400,6 +414,7 @@
         document.body.style.overflow = open ? 'hidden' : '';
       }
       btn.addEventListener('click', toggle);
+      document.getElementById('navMobileClose').addEventListener('click', toggle);
       menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
         menu.classList.remove('open');
         btn.classList.remove('open');
