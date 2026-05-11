@@ -55,11 +55,11 @@
       const navContainer = document.createElement('div');
       navContainer.innerHTML = html;
 
-      const fragment = document.createDocumentFragment();
-      while (navContainer.firstElementChild) {
-        fragment.appendChild(navContainer.firstElementChild);
-      }
-      document.body.insertBefore(fragment, document.body.firstChild);
+      const navEl = navContainer.querySelector('nav');
+      const mobileMenuEl = navContainer.querySelector('#navMobileMenu');
+
+      if (mobileMenuEl) document.body.insertBefore(mobileMenuEl, document.body.firstChild);
+      if (navEl) document.body.insertBefore(navEl, document.body.firstChild);
 
       setUpNavigation();
       setUpThemeSwitches();
@@ -71,9 +71,10 @@
   fetch(`res/footer.html?v=${assetVersion}`, { cache: 'no-store' })
     .then(response => response.text())
     .then(html => {
-      const footer = document.createElement('div');
-      footer.innerHTML = html;
-      document.body.appendChild(footer.firstElementChild);
+      const footerContainer = document.createElement('div');
+      footerContainer.innerHTML = html;
+      const footerEl = footerContainer.querySelector('footer');
+      if (footerEl) document.body.appendChild(footerEl);
     })
     .catch(err => console.error('Failed to load footer:', err));
 
