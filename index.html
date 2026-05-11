@@ -540,6 +540,25 @@
       background: var(--aurora);
       transform: translateY(-1px);
     }
+    .join-form-card.form-disabled {
+      opacity: 0.8;
+    }
+    .join-form-card.form-disabled .form-group input,
+    .join-form-card.form-disabled .form-submit {
+      cursor: not-allowed;
+    }
+    .join-form-card.form-disabled .form-group input:disabled {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(var(--teal-rgb), 0.12);
+      color: var(--muted);
+      box-shadow: none;
+    }
+    .join-form-card.form-disabled .form-submit:disabled {
+      background: rgba(var(--teal-rgb), 0.3);
+      color: rgba(8,13,26,0.7);
+      transform: none;
+      box-shadow: none;
+    }
 
     /* ── Social Links ───────────────────────────────── */
     #social {
@@ -807,17 +826,17 @@
             </div>
           </div>
         </div>
-        <div class="join-form-card reveal reveal-delay-2">
+        <div class="join-form-card form-disabled reveal reveal-delay-2" aria-disabled="true">
           <h3>Stay in the Loop</h3>
-          <p>Drop your email and we'll notify you about upcoming classes, socials, and events.</p>
-          <form onsubmit="handleSignup(event)">
+          <p>Email sign-up is temporarily unavailable.</p>
+          <form onsubmit="return false;">
             <div class="form-group">
-              <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+              <input type="text" name="name" placeholder="Your name" required autocomplete="name" disabled />
             </div>
             <div class="form-group">
-              <input type="email" name="email" placeholder="Your email" required autocomplete="email" />
+              <input type="email" name="email" placeholder="Your email" required autocomplete="email" disabled />
             </div>
-            <button type="submit" class="form-submit">Sign Me Up ✦</button>
+            <button type="submit" class="form-submit" disabled>Stay Tuned</button>
           </form>
         </div>
       </div>
