@@ -387,6 +387,24 @@
       margin-bottom: 3rem;
       flex-wrap: wrap;
     }
+    #gallery .btn-ghost {
+      color: var(--ice);
+      border-color: rgba(var(--teal-rgb), 0.55);
+      background: rgba(var(--teal-rgb), 0.05);
+    }
+    #gallery .btn-ghost:hover {
+      color: var(--teal);
+      background: rgba(var(--teal-rgb), 0.14);
+    }
+    [data-theme="light"] #gallery .btn-ghost {
+      color: #10202d !important;
+      border-color: rgba(31, 157, 163, 0.65);
+      background: rgba(31, 157, 163, 0.08);
+    }
+    [data-theme="light"] #gallery .btn-ghost:hover {
+      color: #0b6f74 !important;
+      background: rgba(31, 157, 163, 0.18);
+    }
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
