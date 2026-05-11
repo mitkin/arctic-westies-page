@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Arctic Westies</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="res/shared.css" />
+  <style>
+    .page-wrap {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding: 9rem 2rem 7rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .page-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 3.2rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(var(--teal-rgb), 0.14);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .contact-card:hover {
+      border-color: rgba(var(--teal-rgb), 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(var(--teal-rgb), 0.1);
+    }
+
+    .contact-title {
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-line {
+      color: var(--ice);
+      margin-bottom: 0.45rem;
+    }
+
+    .contact-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .contact-link {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    .quick-list {
+      list-style: none;
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .quick-list li {
+      color: var(--muted);
+      border-left: 2px solid rgba(var(--teal-rgb), 0.45);
+      padding-left: 0.75rem;
+    }
+
+    .map-card {
+      grid-column: 1 / -1;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 420px;
+      border: 0;
+      display: block;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-wrap {
+        padding: 8rem 1.25rem 5rem;
+      }
+
+      .map-frame {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-wrap">
+    <span class="section-label reveal">Get in touch</span>
+    <h1 class="page-title reveal reveal-delay-1">Contact Arctic Westies</h1>
+    <p class="page-intro reveal reveal-delay-2">
+      Questions about classes, socials, or where to find us? Reach out any time.
+      We are happy to help both beginners and experienced dancers.
+    </p>
+
+    <section class="contact-grid">
+      <article class="contact-card reveal reveal-delay-1">
+        <h2 class="contact-title">Venue</h2>
+        <p class="contact-line">LHL Huset</p>
+        <p class="contact-line">Storgata 132</p>
+        <p class="contact-line">Tromso</p>
+        <p class="contact-note" style="margin-top: 0.7rem;">
+          Most classes and socials are held here. Check Facebook for schedule updates.
+        </p>
+      </article>
+
+      <article class="contact-card reveal reveal-delay-2">
+        <h2 class="contact-title">Online</h2>
+        <p class="contact-line">
+          Email: <a class="contact-link" href="mailto:arcticwesties@gmail.com">arcticwesties@gmail.com</a>
+        </p>
+        <p class="contact-line">
+          Facebook:
+          <a class="contact-link" href="https://www.facebook.com/profile.php?id=61551952885255" target="_blank" rel="noopener noreferrer">Arctic Westies Tromso</a>
+        </p>
+        <ul class="quick-list">
+          <li>Beginner-friendly classes every week</li>
+          <li>Social dancing and community events</li>
+          <li>All roles and levels are welcome</li>
+        </ul>
+      </article>
+
+      <article class="contact-card map-card reveal reveal-delay-2">
+        <iframe
+          class="map-frame"
+          title="Map to LHL Huset Storgata 132 Tromso"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=LHL+Huset+Storgata+132+Tromso&output=embed"
+          allowfullscreen
+        ></iframe>
+      </article>
+    </section>
+  </main>
+
+  <script src="res/shared.js"></script>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
