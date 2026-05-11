@@ -1,6 +1,7 @@
 // Inject shared navbar and footer
 (function() {
   const storageKey = 'aw-theme';
+  const assetVersion = '20260511';
 
   function getPreferredTheme() {
     const stored = localStorage.getItem(storageKey);
@@ -48,13 +49,18 @@
   applyTheme(getPreferredTheme());
 
   // Load and inject navbar
-  fetch('res/navbar.html')
+  fetch(`res/navbar.html?v=${assetVersion}`, { cache: 'no-store' })
     .then(response => response.text())
     .then(html => {
-      const nav = document.createElement('div');
-      nav.innerHTML = html;
-      document.body.insertBefore(nav.firstElementChild, document.body.firstChild);
-      if (nav.children.length > 1) document.body.insertBefore(nav.firstElementChild, document.body.firstChild);
+      const navContainer = document.createElement('div');
+      navContainer.innerHTML = html;
+
+      const fragment = document.createDocumentFragment();
+      while (navContainer.firstElementChild) {
+        fragment.appendChild(navContainer.firstElementChild);
+      }
+      document.body.insertBefore(fragment, document.body.firstChild);
+
       setUpNavigation();
       setUpThemeSwitches();
       markCurrentPage();
@@ -62,7 +68,7 @@
     .catch(err => console.error('Failed to load navbar:', err));
 
   // Load and inject footer
-  fetch('res/footer.html')
+  fetch(`res/footer.html?v=${assetVersion}`, { cache: 'no-store' })
     .then(response => response.text())
     .then(html => {
       const footer = document.createElement('div');
