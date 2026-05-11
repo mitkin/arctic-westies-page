@@ -13,6 +13,7 @@
 
     const label = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
     const icon = theme === 'light' ? '☾' : '☀';
+    const logoSrc = theme === 'light' ? 'res/aw-simple-black.svg' : 'res/aw-simple-white.svg';
 
     ['themeSwitch', 'themeSwitchMobile'].forEach(id => {
       const btn = document.getElementById(id);
@@ -21,6 +22,10 @@
       btn.setAttribute('title', label);
       const iconEl = btn.querySelector('.theme-switch-icon');
       if (iconEl) iconEl.textContent = icon;
+    });
+
+    document.querySelectorAll('.nav-logo-mark').forEach(logo => {
+      logo.setAttribute('src', logoSrc);
     });
   }
 
