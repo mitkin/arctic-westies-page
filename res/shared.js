@@ -1,5 +1,47 @@
 // Inject shared navbar and footer
 (function() {
+  const storageKey = 'aw-theme';
+
+  function getPreferredTheme() {
+    const stored = localStorage.getItem(storageKey);
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+
+    const label = theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme';
+    const icon = theme === 'light' ? '☾' : '☀';
+
+    ['themeSwitch', 'themeSwitchMobile'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+      const iconEl = btn.querySelector('.theme-switch-icon');
+      if (iconEl) iconEl.textContent = icon;
+    });
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'light' ? 'dark' : 'light';
+    localStorage.setItem(storageKey, next);
+    applyTheme(next);
+  }
+
+  function setUpThemeSwitches() {
+    ['themeSwitch', 'themeSwitchMobile'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener('click', toggleTheme);
+    });
+    applyTheme(getPreferredTheme());
+  }
+
+  applyTheme(getPreferredTheme());
+
   // Load and inject navbar
   fetch('res/navbar.html')
     .then(response => response.text())
@@ -9,6 +51,7 @@
       document.body.insertBefore(nav.firstElementChild, document.body.firstChild);
       if (nav.children.length > 1) document.body.insertBefore(nav.firstElementChild, document.body.firstChild);
       setUpNavigation();
+      setUpThemeSwitches();
       markCurrentPage();
     })
     .catch(err => console.error('Failed to load navbar:', err));
@@ -56,7 +99,10 @@
     
     links.forEach(link => {
       const href = link.getAttribute('href');
-      if (href && href.includes(currentPage)) {
+      if (!href || href.startsWith('#')) return;
+
+      const linkTarget = href.split('#')[0];
+      if (linkTarget === currentPage) {
         link.classList.add('active');
       }
     });

@@ -173,26 +173,6 @@
       });
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
-
-    // Hamburger menu
-    (function () {
-      const btn = document.getElementById('navHamburger');
-      const menu = document.getElementById('navMobileMenu');
-      function toggle() {
-        const open = menu.classList.toggle('open');
-        btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', open);
-        document.body.style.overflow = open ? 'hidden' : '';
-      }
-      btn.addEventListener('click', toggle);
-      document.getElementById('navMobileClose').addEventListener('click', toggle);
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        menu.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }));
-    })();
   </script>
 
 </body>
