@@ -218,6 +218,58 @@
 
     .container { max-width: 1160px; margin-inline: auto; }
 
+    /* ── Events preview ─────────────────────────────── */
+    .event-preview-card {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      background: var(--card-bg);
+      border: 1px solid rgba(var(--teal-rgb), 0.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .event-preview-card:hover {
+      border-color: rgba(var(--teal-rgb), 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(var(--teal-rgb), 0.1);
+    }
+    .event-preview-image {
+      width: 100%;
+      height: 100%;
+      min-height: 180px;
+      object-fit: cover;
+    }
+    .event-preview-body {
+      padding: 1.75rem 1.75rem 1.75rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .event-preview-date {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .event-preview-body h3 {
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .event-preview-body p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .events-preview-more {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
     /* ── About ──────────────────────────────────────── */
     #about {
       background: var(--navy-mid);
@@ -614,6 +666,9 @@
       .features-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item:nth-child(1) { grid-column: span 1; }
+      .event-preview-card { grid-template-columns: 1fr; }
+      .event-preview-image { min-height: 200px; }
+      .event-preview-body { padding: 1.5rem; }
     }
   </style>
 </head>
@@ -648,6 +703,28 @@
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
       <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ── Events preview ────────────────────────── -->
+  <section id="events-preview">
+    <div class="container">
+      <span class="section-label reveal">What's On</span>
+      <h2 class="section-title reveal reveal-delay-1">News and Happenings</h2>
+      <p class="section-body reveal reveal-delay-2" style="margin-bottom:2.5rem;">
+        Workshops, socials and weekend intensives — here's what's coming up next.
+      </p>
+      <a class="event-preview-card reveal reveal-delay-2" href="https://www.facebook.com/events/1043652004700489/" target="_blank" rel="noopener noreferrer">
+        <img class="event-preview-image" src="res/RolfAndMartine.jpg" alt="Rolf & Martine" loading="lazy" />
+        <div class="event-preview-body">
+          <div class="event-preview-date">Sep 18 – 20, 2026</div>
+          <h3>WCS Weekend Intensive with Rolf &amp; Martine</h3>
+          <p>📍 Storgata 132A (LHL Tromsø) · Fri–Sun</p>
+        </div>
+      </a>
+      <div class="events-preview-more reveal reveal-delay-3">
+        <a href="events.html" class="btn-ghost">View All Events</a>
+      </div>
     </div>
   </section>
 
