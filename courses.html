@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses — Arctic Westies</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="res/shared.css?v=20260511" />
+  <style>
+    .page-wrap {
+      max-width: 1160px;
+      margin-inline: auto;
+      padding: 9rem 2rem 7rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .page-title em { font-style: italic; color: var(--teal); }
+
+    .page-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 700px;
+      line-height: 1.75;
+      margin-bottom: 3.2rem;
+    }
+
+    .courses-list {
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    .course-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(var(--teal-rgb), 0.14);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .course-card:hover {
+      border-color: rgba(var(--teal-rgb), 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(var(--teal-rgb), 0.1);
+    }
+
+    .course-announcement {
+      color: var(--white);
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      line-height: 1.25;
+      margin-bottom: 1.1rem;
+    }
+
+    .course-copy {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      max-width: 900px;
+    }
+
+    .course-subtitle {
+      color: var(--teal);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 1.6rem 0 0.8rem;
+    }
+
+    .course-schedule {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 0.55rem 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .course-schedule li {
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-left: 2px solid rgba(var(--teal-rgb), 0.4);
+      padding-left: 0.7rem;
+    }
+
+    .course-links {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .course-links a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .course-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .page-wrap {
+        padding: 8rem 1.25rem 5rem;
+      }
+
+      .course-card {
+        padding: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page-wrap">
+    <span class="section-label reveal">Learn</span>
+    <h1 class="page-title reveal reveal-delay-1">Our <em>Courses</em></h1>
+    <p class="page-intro reveal reveal-delay-2">
+      Join us for weekly West Coast Swing classes in Tromso, from beginner foundations
+      to advanced skills and social dancing.
+    </p>
+
+    <section class="courses-list">
+      <article class="course-card reveal reveal-delay-2">
+        <h2 class="course-announcement">✨ Registration is now open for our autumn semester! ✨</h2>
+
+        <p class="course-copy">
+          We know you've been missing West Coast Swing - only one month left until classes start again!
+          Sign up now, and invite all your friends, family, colleagues, and anyone else who might enjoy
+          dancing to join our Beginner course. We'd love to welcome lots of new faces this autumn.
+        </p>
+
+        <h3 class="course-subtitle">Autumn schedule</h3>
+        <ul class="course-schedule">
+          <li>18:00-18:55: Solo skills</li>
+          <li>19:00-19:55: Improver course (Level 2)</li>
+          <li>20:00-20:55: Beginner course (Level 1)</li>
+          <li>21:00-23:00: Social dancing</li>
+        </ul>
+
+        <p class="course-copy">
+          This semester we've expanded both our Level 1 and Level 2 curricula. Level 1 now runs over a full
+          semester, with different material in the autumn and spring, so we encourage our members to take it
+          again - especially if you've only recently completed it - to build an even stronger foundation for
+          the Level 2 curriculum.
+        </p>
+
+        <p class="course-copy">
+          Level 2 has also been refreshed with more advanced patterns and technique, giving experienced dancers
+          even more opportunities to develop their skills. We can't wait to see familiar faces back on the dance
+          floor - and to welcome lots of new ones!
+        </p>
+
+        <div class="course-links">
+          <a href="https://fb.me/e/6X1xSJOPO" target="_blank" rel="noopener noreferrer">Beginner course</a>
+          <a href="https://fb.me/e/ahmYqyunO" target="_blank" rel="noopener noreferrer">Improver course + Solo skills</a>
+          <a href="https://forms.gle/CKbk9iBvKppTqkkc9" target="_blank" rel="noopener noreferrer">Registration link</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="res/shared.js?v=20260511"></script>
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

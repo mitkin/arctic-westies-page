@@ -222,6 +222,7 @@
     .event-preview-card {
       display: grid;
       grid-template-columns: 220px 1fr;
+      min-height: 220px;
       gap: 2rem;
       background: var(--card-bg);
       border: 1px solid rgba(var(--teal-rgb), 0.12);
@@ -234,6 +235,9 @@
       border-color: rgba(var(--teal-rgb), 0.4);
       transform: translateY(-4px);
       box-shadow: 0 12px 36px rgba(var(--teal-rgb), 0.1);
+    }
+    .event-preview-card + .event-preview-card {
+      margin-top: 1.1rem;
     }
     .event-preview-image {
       width: 100%;
@@ -710,7 +714,7 @@
   <section id="events-preview">
     <div class="container">
       <span class="section-label reveal">What's On</span>
-      <h2 class="section-title reveal reveal-delay-1">News and Happenings</h2>
+      <h2 class="section-title reveal reveal-delay-1">News</h2>
       <p class="section-body reveal reveal-delay-2" style="margin-bottom:2.5rem;">
         Workshops, socials and weekend intensives — here's what's coming up next.
       </p>
@@ -722,7 +726,15 @@
           <p>📍 Storgata 132A (LHL Tromsø) · Fri–Sun</p>
         </div>
       </a>
-      <div class="events-preview-more reveal reveal-delay-3">
+      <a class="event-preview-card reveal reveal-delay-3" href="courses.html">
+        <img class="event-preview-image" src="res/670909158_122290405946065096_632603687669706200_n.jpg" alt="Arctic Westies class" loading="lazy" />
+        <div class="event-preview-body">
+          <div class="event-preview-date">Autumn 2026</div>
+          <h3>Registration for the autumn semester is now open</h3>
+          <p>Sign up now for Level 1, Level 2, solo skills, and social dancing.</p>
+        </div>
+      </a>
+      <div class="events-preview-more reveal reveal-delay-4">
         <a href="events.html" class="btn-ghost">View All Events</a>
       </div>
     </div>

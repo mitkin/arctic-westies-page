@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- navy background with subtle rounded corners -->
+  <rect width="32" height="32" rx="6" fill="#080d1a"/>
+  <!-- aw-simple-white.svg is landscape ~120×81; center it with padding -->
+  <image href="res/aw-simple-white.svg" x="1" y="6" width="30" height="20"/>
+</svg>
